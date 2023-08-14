@@ -3,8 +3,10 @@
 require_once('../config/Database.class.php');
 
 
-class Task extends Database{
-    public function getStudentTask($student_id){
+class Task extends Database
+{
+    public function getStudentTask($student_id)
+    {
         $sql = "SELECT * FROM tbl_student_task WHERE student_id = ? ORDER BY task_id DESC";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute([$student_id]);
@@ -12,7 +14,8 @@ class Task extends Database{
         return $result;
     }
 
-    public function getCoordinatorTask($organization_id){
+    public function getCoordinatorTask($organization_id)
+    {
         $sql = "SELECT * FROM tbl_coordinator_task WHERE organization_id = ? ORDER BY task_id DESC";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute([$organization_id]);
@@ -20,10 +23,11 @@ class Task extends Database{
         return $result;
     }
 
-    public function createStudentTask($student_id, $task_name, $task_description){
-        if(empty($task_name) || empty($task_description)){
+    public function createStudentTask($student_id, $task_name, $task_description)
+    {
+        if (empty($task_name) || empty($task_description)) {
             return 'Cannot be empty';
-        }else{
+        } else {
             $sql = "INSERT INTO tbl_student_task (student_id, task_name, task_description) VALUES (?, ?, ?)";
             $stmt = $this->connection->prepare($sql);
             $stmt->execute([$student_id, $task_name, $task_description]);
@@ -31,7 +35,8 @@ class Task extends Database{
         }
     }
 
-    public function deleteStudentTask($task_id){
+    public function deleteStudentTask($task_id)
+    {
         $sql = "DELETE FROM tbl_student_task WHERE task_id = ?";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute([$task_id]);

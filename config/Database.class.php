@@ -47,4 +47,35 @@ class Database
             return true;
         }
     }
+    public function getCourseCodes()
+    {
+        try {
+            $query = "SELECT course_code FROM tbl_course";
+            $statement = $this->connection->prepare($query);
+            $statement->execute();
+
+            $result = $statement->fetchAll(PDO::FETCH_COLUMN);
+
+            return $result;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return [];
+        }
+    }
+
+    public function getOrganizationName()
+    {
+        try {
+            $query = "SELECT organization_name FROM tbl_organization";
+            $statement = $this->connection->prepare($query);
+            $statement->execute();
+
+            $result = $statement->fetchAll(PDO::FETCH_COLUMN);
+
+            return $result;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return [];
+        }
+    }
 }

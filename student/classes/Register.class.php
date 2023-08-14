@@ -1,12 +1,14 @@
-<?php 
+<?php
 
 require_once('../config/Database.class.php');
 
-class Register extends Database{
-    public function register($email, $password, $user_status, $user_role, $student_id_number, $first_name, $last_name, $contact_number, $course_id, $address, $school_year, $organization_id, $start_date, $required_hours){
-        if(empty($email) || empty($password) || empty($user_status) || empty($user_role) || empty($student_id_number) || empty($first_name) || empty($last_name) || empty($contact_number) || empty($course_id) || empty($address) || empty($school_year) || empty($organization_id) || empty($start_date) || empty($required_hours)){
+class Register extends Database
+{
+    public function register($email, $password, $user_status, $user_role, $student_id_number, $first_name, $last_name, $contact_number, $course_id, $address, $school_year, $organization_id, $start_date, $required_hours)
+    {
+        if (empty($email) || empty($password) || empty($user_status) || empty($user_role) || empty($student_id_number) || empty($first_name) || empty($last_name) || empty($contact_number) || empty($course_id) || empty($address) || empty($school_year) || empty($organization_id) || empty($start_date) || empty($required_hours)) {
             return 'All fields are required';
-        }else{
+        } else {
             $sql = "SELECT * FROM tbl_user WHERE user_email = ?";
             $stmt = $this->connection->prepare($sql);
             $stmt->execute([$email]);
@@ -17,9 +19,9 @@ class Register extends Database{
             $stmt->execute([$student_id_number]);
             $result_student_id_number = $stmt->fetch();
 
-            if($result_email > 0 || $result_student_id_number > 0){
+            if ($result_email > 0 || $result_student_id_number > 0) {
                 return 'Email or Student ID Number already exists';
-            }else{
+            } else {    
                 $otp = rand(100000, 999999);
 
                 $sql = "INSERT INTO tbl_user (user_email, user_password, user_status, user_role) VALUES (?, ?, ?, ?)";
@@ -64,17 +66,17 @@ class Register extends Database{
                     <div style="margin:50px auto;width:70%;padding:20px 0">
                         <div style="border-bottom:1px solid #eee">
                             <a href="" style="font-size:1.4em;color: #00466a;text-decoration:none;font-weight:600">
-                            '.$subject.'
+                            ' . $subject . '
                             </a>
                         </div>
                         <p style="font-size:1.1em">
-                        Hello, '.$first_name.' '.$last_name.'!
+                        Hello, ' . $first_name . ' ' . $last_name . '!
                         </p>
                         <p>
                         Your account has been created. Please verify your account by entering the following OTP:
                         </p>
                         <h2 style="background: #00466a;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">
-                        '.$otp.'
+                        ' . $otp . '
                         </h2>
                         <p style="font-size:0.9em;">Regards,<br />
                         OJT RMS
