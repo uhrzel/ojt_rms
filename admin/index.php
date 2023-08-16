@@ -19,9 +19,7 @@ $curr_page = basename(__FILE__);
                             <?= $title; ?>
                         </span>
                     </h1>
-
-                    <a class="btn btn-white float-right" id="create_new" href="javascript:void(0);" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="btn btn-white float-right" id="create_new" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="icon text-white-600 mr-2">
                             <i class="fas fa-plus"></i>
                         </span>
@@ -29,23 +27,19 @@ $curr_page = basename(__FILE__);
                             Create New
                         </span>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up"
-                        aria-labelledby="create_new">
+                    <ul class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up" aria-labelledby="create_new">
                         <li>
-                            <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal"
-                                data-target="#createOrganizationModal">
+                            <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal" data-target="#createOrganizationModal">
                                 Organization
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal"
-                                data-target="#createcoordinatorModal">
+                            <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal" data-target="#createcoordinatorModal">
                                 Coordinator
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal"
-                                data-target="#createcourseModal">
+                            <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal" data-target="#createcourseModal">
                                 Course
                             </a>
                         </li>
@@ -67,7 +61,7 @@ $curr_page = basename(__FILE__);
                                 Coordinator
                             </p>
                             <p>
-                                <?=count($coordinators); ?>
+                                <?= count($coordinators); ?>
                             </p>
                         </div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
@@ -83,7 +77,7 @@ $curr_page = basename(__FILE__);
                                 OJT Students
                             </p>
                             <p>
-                                <?=count($students); ?>
+                                <?= count($students); ?>
                             </p>
                         </div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
@@ -99,7 +93,7 @@ $curr_page = basename(__FILE__);
                                 Course
                             </p>
                             <p>
-                                <?=count($courses); ?>
+                                <?= count($courses); ?>
                             </p>
                         </div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
@@ -113,60 +107,59 @@ $curr_page = basename(__FILE__);
 
             <div class="card mb-4">
                 <div class="card-header">
-                    Organization/s <span class="badge badge-primary mx-2"><?=count($organizations); ?></span>
+                    Organization/s <span class="badge badge-primary mx-2"><?= count($organizations); ?></span>
                 </div>
                 <div class="card-body">
-                    <?php if(count($organizations) > 0): ?>
-                    <div class="datatable table-responsive">
-                        <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Organization Name</th>
-                                    <th>Organization Address</th>
-                                    <th>Organization Email</th>
-                                    <th>OJT Students</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach($organizations as $organization): ?>
-                                <tr>
-                                    <td>
-                                        <?=$organization['organization_name']; ?>
-                                    </td>
-                                    <td>
-                                        <?=$organization['organization_address']; ?>
-                                    </td>
-                                    <td>
-                                        <?=$organization['organization_email']; ?>
-                                    </td>
-                                    <td>
-                                        <?php $ojt_students = $get_student->getStudentsByOrganization($organization['organization_id']); ?>
-                                        <?php if(count($ojt_students) > 0): ?>
-                                            <span class="badge badge-success badge-md">
-                                                <?=count($ojt_students); ?>
-                                            </span>
-                                        <?php else: ?>
-                                            <span class="badge badge-danger badge-sm">
-                                                N/A
-                                            </span>
-                                        <?php endif; ?>
-                                    </td>
-                                    <td>
-                                        <a href="organization.php?organization_id=<?=$organization['organization_id']; ?>"
-                                            class="btn btn-primary btn-sm" title="View">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                    <?php else: ?>
-                    <div class="alert alert-info">
-                        No organization found.
-                    </div>
+                    <?php if (count($organizations) > 0) : ?>
+                        <div class="datatable table-responsive">
+                            <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Organization Name</th>
+                                        <th>Organization Address</th>
+                                        <th>Organization Email</th>
+                                        <th>OJT Students</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($organizations as $organization) : ?>
+                                        <tr>
+                                            <td>
+                                                <?= $organization['organization_name']; ?>
+                                            </td>
+                                            <td>
+                                                <?= $organization['organization_address']; ?>
+                                            </td>
+                                            <td>
+                                                <?= $organization['organization_email']; ?>
+                                            </td>
+                                            <td>
+                                                <?php $ojt_students = $get_student->getStudentsByOrganization($organization['organization_id']); ?>
+                                                <?php if (count($ojt_students) > 0) : ?>
+                                                    <span class="badge badge-success badge-md">
+                                                        <?= count($ojt_students); ?>
+                                                    </span>
+                                                <?php else : ?>
+                                                    <span class="badge badge-danger badge-sm">
+                                                        N/A
+                                                    </span>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td>
+                                                <a href="organization.php?organization_id=<?= $organization['organization_id']; ?>" class="btn btn-primary btn-sm" title="View">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php else : ?>
+                        <div class="alert alert-info">
+                            No organization found.
+                        </div>
                     <?php endif; ?>
                 </div>
             </div>
@@ -174,8 +167,7 @@ $curr_page = basename(__FILE__);
         <!--End Table-->
 
         <!-- create organization modal -->
-        <div class="modal fade" id="createOrganizationModal" data-backdrop="static" tabindex="-1" role="dialog"
-            aria-labelledby="createOrganizationModalLabel" aria-hidden="true">
+        <div class="modal fade" id="createOrganizationModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="createOrganizationModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <form method="POST" action="organization_create.php">
                     <div class="modal-content">
@@ -190,43 +182,35 @@ $curr_page = basename(__FILE__);
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="organization_name">Name</label>
-                                        <input type="text" class="form-control" id="organization_name"
-                                            name="organization_name" placeholder="Enter Organization Name" required>
+                                        <input type="text" class="form-control" id="organization_name" name="organization_name" placeholder="Enter Organization Name" required>
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="organization_address">Address</label>
-                                        <input type="text" class="form-control" id="organization_address"
-                                            name="organization_address" placeholder="Enter Organization Address"
-                                            required>
+                                        <input type="text" class="form-control" id="organization_address" name="organization_address" placeholder="Enter Organization Address" required>
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="organization_email">Email</label>
-                                        <input type="email" class="form-control" id="organization_email"
-                                            name="organization_email" placeholder="Enter Organization Email" required>
+                                        <input type="email" class="form-control" id="organization_email" name="organization_email" placeholder="Enter Organization Email" required>
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="organization_contact_number">Contact Number</label>
-                                        <input type="text" class="form-control" id="organization_contact_number"
-                                            name="organization_contact_number"
-                                            placeholder="Enter Organization Contact Number" required>
+                                        <input type="text" class="form-control" id="organization_contact_number" name="organization_contact_number" placeholder="Enter Organization Contact Number" required>
                                     </div>
                                 </div>
 
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="organization_description">Description</label>
-                                        <textarea class="form-control" id="organization_description" rows="3"
-                                            name="organization_description" placeholder="Enter Organization Description"
-                                            required></textarea>
+                                        <textarea class="form-control" id="organization_description" rows="3" name="organization_description" placeholder="Enter Organization Description" required></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -242,8 +226,7 @@ $curr_page = basename(__FILE__);
         <!-- end create organization modal -->
 
         <!-- create coordinator Modal-->
-        <div class="modal fade" id="createcoordinatorModal" data-backdrop="static" tabindex="-1" role="dialog"
-            aria-labelledby="createcoordinatorModalLabel" aria-hidden="true">
+        <div class="modal fade" id="createcoordinatorModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="createcoordinatorModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <form method="POST" action="coordinator_create.php">
@@ -259,38 +242,33 @@ $curr_page = basename(__FILE__);
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="first_name">First Name</label>
-                                            <input type="text" class="form-control" id="first_name" name="first_name"
-                                                placeholder="Enter first name" required>
+                                            <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter first name" required>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="last_name">Last Name</label>
-                                            <input type="text" class="form-control" id="last_name" name="last_name"
-                                                placeholder="Enter last name" required>
+                                            <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter last name" required>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="coordinator_contact_number">Contact Number</label>
-                                            <input type="text" class="form-control" id="coordinator_contact_number"
-                                                name="coordinator_contact_number"
-                                                placeholder="Enter coordinator Contact Number" required>
+                                            <input type="text" class="form-control" id="coordinator_contact_number" name="coordinator_contact_number" placeholder="Enter coordinator Contact Number" required>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="organization_id">Organization</label>
-                                            <select class="form-control" id="organization_id" name="organization_id"
-                                                required>
+                                            <select class="form-control" id="organization_id" name="organization_id" required>
                                                 <option hidden disabled selected>Select Organization</option>
-                                                <?php foreach($organizations as $organization): ?>
-                                                <option value="<?=$organization['organization_id']; ?>">
-                                                    <?=$organization['organization_name']; ?>
-                                                </option>
+                                                <?php foreach ($organizations as $organization) : ?>
+                                                    <option value="<?= $organization['organization_id']; ?>">
+                                                        <?= $organization['organization_name']; ?>
+                                                    </option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
@@ -299,8 +277,7 @@ $curr_page = basename(__FILE__);
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="coordinator_email">Email</label>
-                                            <input type="email" class="form-control" id="coordinator_email"
-                                                name="coordinator_email" placeholder="Enter coordinator Email" required>
+                                            <input type="email" class="form-control" id="coordinator_email" name="coordinator_email" placeholder="Enter coordinator Email" required>
                                         </div>
                                     </div>
                                 </div>
@@ -317,8 +294,7 @@ $curr_page = basename(__FILE__);
         <!-- End create coordinator Modal-->
 
         <!-- create course Modal-->
-        <div class="modal fade" id="createcourseModal" tabindex="-1" role="dialog"
-            aria-labelledby="createcourseModalLabel" aria-hidden="true">
+        <div class="modal fade" id="createcourseModal" tabindex="-1" role="dialog" aria-labelledby="createcourseModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <form method="POST" action="course_create.php">
@@ -335,16 +311,14 @@ $curr_page = basename(__FILE__);
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="course_code">Course Code</label>
-                                            <input type="text" class="form-control" id="course_code"
-                                                name="course_code" placeholder="Enter course code" required>
+                                            <input type="text" class="form-control" id="course_code" name="course_code" placeholder="Enter course code" required>
                                         </div>
                                     </div>
 
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="course_name">Course Name</label>
-                                            <input type="text" class="form-control" id="course_name"
-                                                name="course_name" placeholder="Enter course name" required>
+                                            <input type="text" class="form-control" id="course_name" name="course_name" placeholder="Enter course name" required>
                                         </div>
                                     </div>
                                 </div>
