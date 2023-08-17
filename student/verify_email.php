@@ -3,17 +3,16 @@
 require_once('classes/API_AutoLoader.php');
 
 
-$email = $_GET['email'];
-
+$email = $_POST['email'];
 $get_email = new OTPVerify();
 // $email = 'ortegacanillo76@gmail.com';
 
 $result = $get_email->verifyEmail($email);
 
-if($result == 'Email is required'){
+if ($result == 'Email is required') {
     echo $result;
-}elseif($result == 'Email not found'){
+} elseif ($result == 'Email not found') {
     echo $result;
-}else{
+} else {
     echo $result;
 }

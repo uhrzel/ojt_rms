@@ -21,6 +21,11 @@ class OTPVerify extends Database
                 $stmt = $this->connection->prepare($sql);
                 $stmt->execute([':user_id' => $result['user_id']]);
 
+                // Add the following code to update the isVerified column
+                $sql = "UPDATE tbl_student SET isVerified = ? WHERE student_id = ?";
+                $stmt = $this->connection->prepare($sql);
+                $stmt->execute(['1', $result['student_id']]);
+
                 return $result['user_id'];
             } else {
                 return 'Incorrect OTP';
@@ -28,15 +33,21 @@ class OTPVerify extends Database
         }
     }
 
+
     public function verifyEmail($email)
     {
         if (empty($email)) {
             return 'Email is required';
         } else {
-            $sql = "SELECT * FROM tbl_user WHERE user_email = ?";
+            $sql = "SELECT u.*, s.first_name, s.last_name 
+        FROM tbl_user u
+        JOIN tbl_student s ON u.user_id = s.student_id
+        WHERE u.user_email = ?";
             $stmt = $this->connection->prepare($sql);
             $stmt->execute([$email]);
             $result = $stmt->fetch();
+
+
 
             if ($result) {
                 $otp = rand(100000, 999999);
@@ -84,6 +95,7 @@ class OTPVerify extends Database
 
                 return $result['user_id'];
             } else {
+
                 return 'Email not found';
             }
         }
