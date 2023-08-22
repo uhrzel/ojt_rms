@@ -21,22 +21,22 @@ $organization_id = $_GET['organization_id'];
 
 $check_attendance = $attendance->getAttendanceAfternoon($student_id, $attendance_date, $organization_id);
 
-if($attendance_log == 'Afternoon'){
-    if($check_attendance){
+if ($attendance_log == 'Afternoon') {
+    if ($check_attendance) {
         $result = $attendance->AttendanceTimeOut($check_attendance['attendance_id'], $attendance_time);
-        if($result){
+        if ($result) {
             echo 'Attendance Time Out Success';
-        }else{
+        } else {
             echo 'Attendance Time Out Failed';
         }
-    }else if(!$check_attendance){
+    } else if (!$check_attendance) {
         $result = $attendance->AttendanceTimeIn($student_id, $attendance_date, $attendance_time, $attendance_log, $coordinator_id, $organization_id);
-        if($result){
+        if ($result) {
             echo 'Attendance Time In Success';
-        }else{
+        } else {
             echo 'Attendance Time In Failed';
         }
-    }else{
+    } else {
         echo 'Attendance Already Checked';
     }
 }

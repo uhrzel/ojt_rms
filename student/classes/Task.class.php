@@ -23,6 +23,7 @@ class Task extends Database
         return $result;
     }
 
+
     public function createStudentTask($student_id, $task_name, $task_description)
     {
         if (empty($task_name) || empty($task_description)) {

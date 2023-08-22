@@ -1,9 +1,9 @@
 <?php
 
+
 require_once('classes/API_AutoLoader.php');
 
 $user_id = $_GET['user_id'];
-
 
 $get_student = new Student();
 $get_course = new Course();
@@ -22,6 +22,10 @@ $remaining_hours = $get_attendance->getTotalTrainingHours($user_id);
 $tasks = $get_task->getStudentTask($user_id);
 $assigned_task = $get_task->getCoordinatorTask($student['organization_id']);
 
+$assigned_task_values = array_column($assigned_task, 'task_name');
+$assigned_task_description = array_column($assigned_task, 'task_description');
+$assigned_task_created = array_column($assigned_task, 'task_created');
+
 echo json_encode([
     'user' => $student,
     'course' => $course,
@@ -31,6 +35,11 @@ echo json_encode([
     'coordinator' => $coordinator,
     'remaining_hours' => $remaining_hours,
     'tasks' => $tasks,
+    'assigned_task_values' => $assigned_task_values,
+    'assigned_task_description' => $assigned_task_description,
+    'assigned_task_created' => $assigned_task_created,
     'total_tasks' => count($tasks),
-    'assigned_task' => $assigned_task
+    'first_name' => $student['first_name'],
+    'last_name' => $student['last_name'],
+    'email' => $student['user_email']
 ]);
