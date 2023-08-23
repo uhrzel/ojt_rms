@@ -14,7 +14,7 @@ class Attendance extends Database
         return $result;
     }
 
-    //THIS LINE ARE NOT ACCURATE WHEN DETTING TOTAL_HOURS ITS BECAUSE OF THE TIMEDIFF OPERATION
+    //THIS LINE ARE NOT ACCURATE WHEN GETTING TOTAL_HOURS ITS BECAUSE OF THE TIMEDIFF OPERATION
 
     /*     public function getTotalTrainingHours($student_id)
     {
