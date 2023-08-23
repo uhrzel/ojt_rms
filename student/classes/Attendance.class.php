@@ -46,10 +46,12 @@ class Attendance extends Database
         $total_seconds = 0;
 
         foreach ($attendance_records as $record) {
-            $time_in = strtotime($record['attendance_time_in']);
-            $time_out = strtotime($record['attendance_time_out']);
-            $time_difference = $time_out - $time_in;
-            $total_seconds += $time_difference;
+            if (!empty($record['attendance_time_out'])) {
+                $time_in = strtotime($record['attendance_time_in']);
+                $time_out = strtotime($record['attendance_time_out']);
+                $time_difference = $time_out - $time_in;
+                $total_seconds += $time_difference;
+            }
         }
 
         $total_hours = $total_seconds / 3600;
@@ -66,14 +68,6 @@ class Attendance extends Database
         return $remaining_hours;
     }
 
-    public function checkAttendance($student_id, $attendance_date)
-    {
-        $sql = "SELECT * FROM tbl_attendance WHERE student_id = ? AND attendance_date = ?";
-        $stmt = $this->connection->prepare($sql);
-        $stmt->execute([$student_id, $attendance_date]);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result;
-    }
 
     public function getAttendanceMorning($student_id, $attendance_date, $organization_id)
     {

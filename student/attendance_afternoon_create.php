@@ -19,7 +19,9 @@ $organization_id = $_GET['organization_id'];
 // $coordinator_id = 1;
 // $organization_id = 1;
 
-$check_attendance = $attendance->getAttendanceAfternoon($student_id, $attendance_date, $organization_id);
+
+//UNFIX 
+/* $check_attendance = $attendance->getAttendanceAfternoon($student_id, $attendance_date, $organization_id);
 
 if ($attendance_log == 'Afternoon') {
     if ($check_attendance) {
@@ -39,4 +41,31 @@ if ($attendance_log == 'Afternoon') {
     } else {
         echo 'Attendance Already Checked';
     }
+}
+ */
+
+$check_attendance = $attendance->getAttendanceAfternoon($student_id, $attendance_date, $organization_id);
+
+if ($attendance_log == 'Afternoon') {
+    if ($check_attendance) {
+        if ($check_attendance['attendance_time_out']) {
+            echo 'Attendance Already Checked Out';
+        } else {
+            $result = $attendance->AttendanceTimeOut($check_attendance['attendance_id'], $attendance_time);
+            if ($result) {
+                echo 'Attendance Time Out Success';
+            } else {
+                echo 'Attendance Time Out Failed';
+            }
+        }
+    } else {
+        $result = $attendance->AttendanceTimeIn($student_id, $attendance_date, $attendance_time, $attendance_log, $coordinator_id, $organization_id);
+        if ($result) {
+            echo 'Attendance Time In Success';
+        } else {
+            echo 'Attendance Time In Failed';
+        }
+    }
+} else {
+    echo 'Invalid Attendance Log';
 }
