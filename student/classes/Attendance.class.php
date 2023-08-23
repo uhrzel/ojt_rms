@@ -14,7 +14,9 @@ class Attendance extends Database
         return $result;
     }
 
-    public function getTotalTrainingHours($student_id)
+    //THIS LINE ARE NOT ACCURATE WHEN DETTING TOTAL_HOURS ITS BECAUSE OF THE TIMEDIFF OPERATION
+
+    /*     public function getTotalTrainingHours($student_id)
     {
         $sql = "SELECT SUM(TIME_TO_SEC(TIMEDIFF(attendance_time_out, attendance_time_in))) AS total_hours FROM tbl_attendance WHERE student_id = ?";
         $stmt = $this->connection->prepare($sql);
@@ -31,10 +33,10 @@ class Attendance extends Database
         // format remaining hours
         $remaining_hours = number_format($remaining_hours, 0, '.', '');
         return $remaining_hours;
-    }
+    } */
 
     //THIS COULD BE FIX THE GET TOTAL HOURS OF REMAINING HOURS
-    /*   public function getTotalTrainingHours($student_id)
+    public function getTotalTrainingHours($student_id)
     {
         $sql = "SELECT attendance_time_in, attendance_time_out FROM tbl_attendance WHERE student_id = ?";
         $stmt = $this->connection->prepare($sql);
@@ -63,7 +65,7 @@ class Attendance extends Database
         $remaining_hours = number_format($remaining_hours, 0, '.', '');
         return $remaining_hours;
     }
- */
+
     public function checkAttendance($student_id, $attendance_date)
     {
         $sql = "SELECT * FROM tbl_attendance WHERE student_id = ? AND attendance_date = ?";
