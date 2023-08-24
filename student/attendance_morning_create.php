@@ -48,7 +48,7 @@ $check_attendance = $attendance->getAttendanceMorning($student_id, $attendance_d
 if ($attendance_log == 'Morning') {
     if ($check_attendance) {
         if ($check_attendance['attendance_time_out']) {
-            echo 'Attendance Already Checked Out';
+            echo 'Attendance Already Checked';
         } else {
             $result = $attendance->AttendanceTimeOut($check_attendance['attendance_id'], $attendance_time);
             if ($result) {
