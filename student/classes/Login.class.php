@@ -55,7 +55,7 @@ class Login extends Database
                                     OJT RMS
                                     </p><br /><br />
                                     <p style="font-size:0.9em;">This is a system generated email. Please do not reply.</p>
-                                    <a href="mailto:ortegacanillo76@gmail.com">
+                                    <a href="mailto:Arzeljrz17@gmail.com">
                                     Here
                                     </a>
                                     <hr style="border:none;border-top:1px solid #eee" />
@@ -64,7 +64,7 @@ class Login extends Database
                                         OJT RMS
                                         </p>
                                         <p>
-                                        6038, Toledo City, Cebu
+                                        9504, Polomolok South Cotabato
                                         </p>
                                         <p>
                                         Philippines

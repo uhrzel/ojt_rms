@@ -2,8 +2,10 @@
 
 require_once('../config/Database.class.php');
 
-class Coordinator extends Database{
-    public function getAllCoordinators(){
+class Coordinator extends Database
+{
+    public function getAllCoordinators()
+    {
         $sql = "SELECT * FROM tbl_coordinator INNER JOIN tbl_user ON tbl_coordinator.coordinator_id = tbl_user.user_id INNER JOIN tbl_organization ON tbl_coordinator.organization_id = tbl_organization.organization_id ORDER BY tbl_coordinator.first_name ASC";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
@@ -11,7 +13,8 @@ class Coordinator extends Database{
         return $result;
     }
 
-    public function getAllCoordinatorsByOrganization($organization_id){
+    public function getAllCoordinatorsByOrganization($organization_id)
+    {
         $sql = "SELECT * FROM tbl_coordinator INNER JOIN tbl_user ON tbl_coordinator.coordinator_id = tbl_user.user_id INNER JOIN tbl_organization ON tbl_coordinator.organization_id = tbl_organization.organization_id WHERE tbl_coordinator.organization_id = ?";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute([$organization_id]);
@@ -19,15 +22,17 @@ class Coordinator extends Database{
         return $result;
     }
 
-    public function getCoordinator($id){
+    public function getCoordinator($id)
+    {
         $sql = "SELECT * FROM tbl_coordinator INNER JOIN tbl_user ON tbl_coordinator.coordinator_id = tbl_user.user_id INNER JOIN tbl_organization ON tbl_coordinator.organization_id = tbl_organization.organization_id WHERE tbl_coordinator.coordinator_id = ?";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute([$id]);
         $result = $stmt->fetch();
         return $result;
     }
-    
-    public function getCoordinatorByEmail($email){
+
+    public function getCoordinatorByEmail($email)
+    {
         $sql = "SELECT * FROM tbl_coordinator INNER JOIN tbl_user ON tbl_coordinator.coordinator_id = tbl_user.user_id WHERE tbl_user.user_email = ?";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute([$email]);
@@ -35,20 +40,21 @@ class Coordinator extends Database{
         return $row;
     }
 
-    public function createCoordinator($email, $first_name, $last_name, $contact_number, $organization_id){
-        if(empty($email) || empty($first_name) || empty($last_name) || empty($contact_number) || empty($organization_id)){
+    public function createCoordinator($email, $first_name, $last_name, $contact_number, $organization_id)
+    {
+        if (empty($email) || empty($first_name) || empty($last_name) || empty($contact_number) || empty($organization_id)) {
             $_SESSION['error'] = 'All fields are required.';
             header('Location: coordinators.php');
-        }else {
+        } else {
             $sql = "SELECT * FROM tbl_user WHERE user_email = ?";
             $stmt = $this->connection->prepare($sql);
             $stmt->execute([$email]);
             $result = $stmt->fetch();
 
-            if($result){
+            if ($result) {
                 $_SESSION['error'] = 'Email already exists.';
                 header('Location: coordinators.php');
-            }else{
+            } else {
                 $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
                 $password = array();
                 $alphaLength = strlen($alphabet) - 1;
@@ -75,24 +81,24 @@ class Coordinator extends Database{
                     <div style="margin:50px auto;width:70%;padding:20px 0">
                         <div style="border-bottom:1px solid #eee">
                             <a href="" style="font-size:1.4em;color: #00466a;text-decoration:none;font-weight:600">
-                            '.$subject.'
+                            ' . $subject . '
                             </a>
                         </div>
                         <p style="font-size:1.1em">
-                        Hello, '.$first_name.' '.$last_name.'!
+                        Hello, ' . $first_name . ' ' . $last_name . '!
                         </p>
                         <p>
                         Congratulations! You have been added as a coordinator in OJT RMS. Please use the following credentials to login to your account.
                         </p>
                         <h2 style="background: #00466a;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">
-                        Email: '.$email.'<br />
-                        Password: '.$password.'
+                        Email: ' . $email . '<br />
+                        Password: ' . $password . '
                         </h2>
                         <p style="font-size:0.9em;">Regards,<br />
                         OJT RMS
                         </p><br /><br />
                         <p style="font-size:0.9em;">This is a system generated email. Please do not reply.</p>
-                        <a href="mailto:ortegacanillo76@gmail.com">
+                        <a href="mailto:arzeljrz17@gmail.com">
                         Here
                         </a>
                         <hr style="border:none;border-top:1px solid #eee" />
@@ -101,7 +107,7 @@ class Coordinator extends Database{
                             OJT RMS
                             </p>
                             <p>
-                            6038, Toledo City, Cebu
+                            9504, Polomolok South Cotabato
                             </p>
                             <p>
                             Philippines
@@ -119,7 +125,8 @@ class Coordinator extends Database{
         }
     }
 
-    public function updateCoordinator($coordinator_id, $email, $first_name, $last_name, $contact_number, $organization_id){
+    public function updateCoordinator($coordinator_id, $email, $first_name, $last_name, $contact_number, $organization_id)
+    {
         $sql = "UPDATE tbl_user SET user_email = ? WHERE user_id = ?";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute([$email, $coordinator_id]);
@@ -132,7 +139,8 @@ class Coordinator extends Database{
         header('Location: coordinator.php?coordinator_id=' . $coordinator_id);
     }
 
-    public function deleteCoordinator($id){
+    public function deleteCoordinator($id)
+    {
         $sql = "DELETE FROM tbl_coordinator WHERE coordinator_id = ?";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute([$id]);
@@ -145,7 +153,8 @@ class Coordinator extends Database{
         header('Location: coordinators.php');
     }
 
-    public function verifyCoordinator($id){
+    public function verifyCoordinator($id)
+    {
         $sql = "UPDATE tbl_user SET isVerified = '1' WHERE user_id = ?";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute([$id]);
@@ -154,7 +163,8 @@ class Coordinator extends Database{
         header('Location: coordinators.php');
     }
 
-    public function unverifyCoordinator($id){
+    public function unverifyCoordinator($id)
+    {
         $sql = "UPDATE tbl_user SET isVerified = '0' WHERE user_id = ?";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute([$id]);

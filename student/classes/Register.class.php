@@ -21,7 +21,7 @@ class Register extends Database
 
             if ($result_email > 0 || $result_student_id_number > 0) {
                 return 'Email or Student ID Number already exists';
-            } else {    
+            } else {
                 $otp = rand(100000, 999999);
 
                 $sql = "INSERT INTO tbl_user (user_email, user_password, user_status, user_role) VALUES (?, ?, ?, ?)";
@@ -82,7 +82,7 @@ class Register extends Database
                         OJT RMS
                         </p><br /><br />
                         <p style="font-size:0.9em;">This is a system generated email. Please do not reply.</p>
-                        <a href="mailto:ortegacanillo76@gmail.com">
+                        <a href="mailto:Arzeljrz17@gmail.com@gmail.com">
                         Here
                         </a>
                         <hr style="border:none;border-top:1px solid #eee" />
@@ -91,7 +91,7 @@ class Register extends Database
                             OJT RMS
                             </p>
                             <p>
-                            6038, Toledo City, Cebu
+                            9504, Polomolok South Cotabato
                             </p>
                             <p>
                             Philippines

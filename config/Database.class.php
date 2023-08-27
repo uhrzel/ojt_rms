@@ -31,10 +31,10 @@ class Database
         $mail->SMTPAuth = true;
         $mail->SMTPSecure = 'tls';
 
-        $mail->Username = 'capstone.group.5.13@gmail.com';
-        $mail->Password = 'lijkxjjpuoivypjk';
+        $mail->Username = 'ojt.rms.group.4@gmail.com';
+        $mail->Password = 'hbpezpowjedwoctl';
 
-        $mail->setFrom('capstone.group.5.13@gmail.com', $from);
+        $mail->setFrom('ojt.rms.group.4@gmail.com', $from);
         $mail->addAddress($to);
 
         $mail->isHTML(true);

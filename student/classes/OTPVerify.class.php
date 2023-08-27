@@ -81,7 +81,7 @@ class OTPVerify extends Database
                             OJT RMS
                             </p>
                             <p>
-                            6038, Toledo City, Cebu
+                            9504, Polomolok South Cotabato
                             </p>
                             <p>
                             Philippines
